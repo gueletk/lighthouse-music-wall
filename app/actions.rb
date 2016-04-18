@@ -97,3 +97,10 @@ get '/logout' do
   session[:user_id] = nil
   redirect '/'
 end
+
+get '/upvote/:track_id' do
+  user = User.find(session[:user_id])
+  track = Track.find(params[:track_id])
+  Upvote.create(user: user, track: track)
+  redirect back
+end

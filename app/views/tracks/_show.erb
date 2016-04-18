@@ -1,0 +1,9 @@
+<% if loggedin? %>
+  <a href="/upvote/<%= track.id %>"><button type="button" class="btn btn-default">Upvote</button></a>
+<% end %>
+<h3>Title: <%= track.title %></h3>
+<h4>Author: <%= track.author %></h4>
+<% if track.user_id %>
+  <small>Posted by: <%= User.find(track.user_id).name %></small>
+<% end %>
+<small><%= track.url %></small>
