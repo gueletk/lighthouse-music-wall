@@ -1,0 +1,16 @@
+<h1>Add a new track!</h1>
+<form method="post">
+  <div>
+    <label>Title:</label>
+    <input type="text" name="title" value="<%= @track.title %>">
+  </div>
+  <div>
+    <label>Author:</label>
+    <input type="text" name="author" value="<%= @track.author %>">
+  </div>
+  <div>
+    <label>URL (optional):</label>
+    <input type="text" name="url" value="<%= @track.url %>">
+  </div>
+  <input type="submit" value="Submit">
+</form>
