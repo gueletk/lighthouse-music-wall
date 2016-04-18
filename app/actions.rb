@@ -1,4 +1,6 @@
 # Homepage (Root path)
+enable :sessions
+
 get '/' do
   erb :index
 end
@@ -23,5 +25,20 @@ post '/tracks/new' do
     redirect '/tracks'
   else
     erb :'/tracks/new'
+  end
+end
+
+get '/login' do
+  @user = User.new(username: session[:username])
+  erb :'login'
+end
+
+post '/login' do
+  @user = User.find_by username: params[:username]
+  if @user.password == params[:password]
+    session[:username] = params[:username]
+    erb :'/loggedin'
+  else
+    redirect '/login'
   end
 end
