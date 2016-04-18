@@ -1,0 +1,19 @@
+<h1>Sign Up</h1>
+
+<% if @user.errors.any? %>
+  <p>
+    Try again
+  </p>
+<% end %>
+
+<form method="post">
+  <label>Username:</label>
+  <input type="text" name="username" value="<%= @user.username %>">
+  <label>Password:</label>
+  <input type="text" name="password" value="<%= @user.password %>">
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= @user.name %>">
+  <label>Email:</label>
+  <input type="text" name="email" value="<%= @user.email %>">
+  <input type="submit" name="Submit">
+</form>
