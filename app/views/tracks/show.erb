@@ -17,7 +17,7 @@
   </form>
 <% elsif !loggedin? %>
   <p>
-    Pleae log in to leave a review.
+    Please log in to leave a review.
   </p>
 <% end %>
 
@@ -29,6 +29,9 @@
       <% if review.content %>
         <%= review.content %>
       <% end%>
+      <% if review.user_id == session[:user_id] %>
+        <a href="/tracks/<%= review.id %>" _method="delete">Delete</a>
+      <% end %>
     </li>
   <% end %>
 </ul>

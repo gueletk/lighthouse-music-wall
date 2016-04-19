@@ -1,6 +1,6 @@
 # Homepage (Root path)
 enable :sessions
-
+use Rack::MethodOverride
 # helpers do
 #   def protected!
 #     return if authorized?
@@ -80,6 +80,12 @@ post '/tracks/:id' do
   redirect back
 end
 
+delete '/tracks/:id' do
+  @review = Review.find_by(id: params[:id])
+  @review.destroy
+  redirect back
+end
+
 get '/login' do
   @user = User.new(username: session[:username])
   erb :'login'
@@ -89,7 +95,7 @@ post '/login' do
   @user = User.find_by username: params[:username]
   if @user.password == params[:password]
     session[:user_id] = @user.id
-    erb :'/loggedin'
+    redirect '/tracks'
   else
     redirect '/login'
   end
