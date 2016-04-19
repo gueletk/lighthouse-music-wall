@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :tracks
   has_many :upvotes
+  has_many :reviews
 
   validates :username, :email, uniqueness: true
   validates :username, :password, :email, :name,

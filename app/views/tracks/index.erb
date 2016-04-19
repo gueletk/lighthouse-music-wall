@@ -2,6 +2,6 @@
 
 <ul class="list-group unstyled">
   <% @tracks.each do |track| %>
-    <%= erb :'tracks/_show', locals: {track: track} %>
+    <%= erb :'tracks/_show_one', locals: {track: track} %>
   <% end %>
 </ul>

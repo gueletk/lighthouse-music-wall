@@ -1,0 +1,34 @@
+<%= erb :'tracks/_show_one', locals: {track: @track} %>
+
+<% if loggedin? %>
+  <form method="post">
+    <label>Posting as: <%= @user.username %></label>
+    <label>Rating:</label>
+    <select name="rating">
+      <option value="1">1 star</option>
+      <option value="2">2 star</option>
+      <option value="3">3 star</option>
+      <option value="4">4 star</option>
+      <option value="5">5 star</option>
+    </select>
+    <label>Review</label>
+    <input type="text" name="content">
+    <input type="submit" name="Submit">
+  </form>
+<% else %>
+  <p>
+    Pleae log in to leave a review.
+  </p>
+<% end %>
+
+<ul class="list-group unstyled">
+  <% @track.reviews.each do |review| %>
+    <li class="list-group-item">
+      User: <%= User.find_by(id: review.user_id).username %>
+      Rating: <%= review.rating %>
+      <% if review.content %>
+        <%= review.content %>
+      <% end%>
+    </li>
+  <% end %>
+</ul>

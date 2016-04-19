@@ -55,6 +55,23 @@ post '/tracks/new' do
   end
 end
 
+get '/tracks/:id' do
+  @track = Track.find_by(id: params[:id])
+  @user = User.find_by(id: session[:user_id])
+  erb :'tracks/show'
+end
+
+post '/tracks/:id' do
+  @review = Review.new(
+    track_id: params[:id],
+    user_id: session[:user_id],
+    content: params[:content],
+    rating: params[:rating]
+    )
+  @review.save
+  redirect back
+end
+
 get '/login' do
   @user = User.new(username: session[:username])
   erb :'login'
