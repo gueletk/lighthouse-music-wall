@@ -30,7 +30,7 @@ get '/' do
 end
 
 get '/tracks' do
-  @tracks = Track.all
+  @tracks = Track.joins(:upvotes).group(:track_id).order('COUNT(track_id) desc')
   erb :'tracks/index'
 end
 
