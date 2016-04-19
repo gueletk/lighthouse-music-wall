@@ -23,6 +23,10 @@ helpers do
     session[:user_id]
   end
 
+  def upvoted? (track_id)
+    Upvote.exists?(session[:user_id], track_id)
+  end
+
 end
 
 get '/' do
@@ -30,7 +34,8 @@ get '/' do
 end
 
 get '/tracks' do
-  @tracks = Track.joins(:upvotes).group(:track_id).order('COUNT(track_id) desc')
+  @tracks = Track.joins("LEFT OUTER JOIN upvotes ON upvotes.track_id = tracks.id").group(:track_id).order('COUNT(track_id) desc')
+  #joins(:upvotes).group(:track_id).order('COUNT(track_id) desc')
   erb :'tracks/index'
 end
 

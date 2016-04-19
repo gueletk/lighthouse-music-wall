@@ -10,7 +10,8 @@ class Upvote < ActiveRecord::Base
   end
 
   def self.count(track_id)
-    where(track_id: track_id).count
+    num = where(track_id: track_id).count
+    num ? num : 0
   end
 
 end

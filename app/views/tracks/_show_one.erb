@@ -1,13 +1,15 @@
-<a href="/tracks/<%= track.id %>">
-  <li class="list-group-item">
-    <% if loggedin? && !Upvote.exists?(session[:user_id], track.id)%>
-      <a href="/upvote/<%= track.id %>"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button></a>
-    <% end %>
+<li class="list-group-item">
+  <% if loggedin? && !upvoted?(track.id) %>
+    <a href="/upvote/<%= track.id %>"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button></a>
+  <% end %>
+  <a href="/tracks/<%= track.id %>">
     Title: <%= track.title %> Author: <%= track.author %>
-    <% if track.user_id %>
+    <% if track.user_id %> <!--remove this if when db is reseeded-->
       <small>Posted by: <%= User.find(track.user_id).name %></small>
     <% end %>
-    <small><%= track.url %></small>
-    <span class="badge"><%= Upvote.count(track.id) %></span>
-  </li>
-</a>
+  </a>
+  <% if track.url %>
+    <a href="<%= track.url %>"><small>Link</small></a>
+  <% end %>
+  <span class="badge"><%= Upvote.count(track.id) %></span>
+</li>
