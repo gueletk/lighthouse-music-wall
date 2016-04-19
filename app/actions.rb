@@ -27,6 +27,10 @@ helpers do
     Upvote.exists?(session[:user_id], track_id)
   end
 
+  def reviewed?(track_id)
+    Review.exists?(session[:user_id], track_id)
+  end
+
 end
 
 get '/' do
@@ -41,7 +45,6 @@ end
 
 get '/tracks/new' do
   loggedin?
-  #protected!
   @track = Track.new
   erb :'tracks/new'
 end

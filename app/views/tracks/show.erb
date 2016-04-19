@@ -1,6 +1,6 @@
 <%= erb :'tracks/_show_one', locals: {track: @track} %>
 
-<% if loggedin? %>
+<% if loggedin? && !reviewed?(@track.id) %>
   <form method="post">
     <label>Posting as: <%= @user.username %></label>
     <label>Rating:</label>
@@ -15,7 +15,7 @@
     <input type="text" name="content">
     <input type="submit" name="Submit">
   </form>
-<% else %>
+<% elsif !loggedin? %>
   <p>
     Pleae log in to leave a review.
   </p>

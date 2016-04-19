@@ -8,7 +8,7 @@
       <small>Posted by: <%= User.find(track.user_id).name %></small>
     <% end %>
   </a>
-  <% if track.url %>
+  <% if !track.url.empty? %>
     <a href="<%= track.url %>"><small>Link</small></a>
   <% end %>
   <span class="badge"><%= Upvote.count(track.id) %></span>
